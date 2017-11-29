@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>spotify</title>
+</head>
+<body>
+	<h1>bbbbb</h1>
+	<script>
+	var encodeParameters = function(params) {
+    // join all key value pairs and store in an array
+    var strArray = [];
+    for (var key in params) {
+        if (params.hasOwnProperty(key)) {
+            var paramString = key + "=" + params[key];
+            strArray.push(paramString);
+        }
+    }
+    // join everything in the array together
+    return strArray.join("&");
+}
+
+
+
+
+		console.log(window.location.hash);
+
+		var extract=function(){
+			var query=window.location.hash.substring(1);
+			var oarams=query.split("&");
+			var return_data={};
+			for (var i=0;i<params.length;i++){
+				var keyvalue=params[i].split('=');
+				console.log(keyvalue);
+				return_data[keyvalue[0]]=keyvalue[1]
+			}
+			return return_data;
+		}
+
+		var parameters=extract();
+
+		var access_token=parameters['access_token'];		
+		// var access_token='BQDb1QHH2LTKa8fpFWOz-tv3gx_8GeFnD62iNpwrb97RvGQBUk15NuCiXQuza2I9wWZcBZQIQfXOMcOG270rJoacioph6k2igRmEZ62bFfWnqDPpGB1EvEC-s9XqWcUOvmpI2SZw_XI8OlZCw1llsXSkNAs';	
+		var recently_played_url='https://api.spotify.com/v1/me/player/recently-played'
+		var params={
+			limit:50
+		}
+		var query_url=recently_played_url+'?'+encodeParameters(params);
+
+		var xhttp2 = new XMLHttpRequest();
+    	
+    	console.log(query_url);
+    	xhttp2.open('GET', query_url);
+    	xhttp2.addEventListener('load', function(){
+    		var response=JSON.parse(this.response)
+    		console.log(response)
+    	});
+    	xhttp2.setRequestHeader('Authorization','Bearer' +access_token);
+    	xhttp2.send();
+
+
+
+	</script>
+
+</body>
+</html>

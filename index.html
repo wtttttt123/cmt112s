@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Google Books Search (Week 7 Lab - CMT112)</title>
+    <title>news and weather</title>
     <link rel="stylesheet" href="css/style.css">
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
@@ -14,7 +14,7 @@
    
 </head>
 <body>
-    <div id="input">
+<!--     <div id="input">
         <form>
             <label for="search_term">Enter a term to search for:
                 <input type="text" id="search_term">
@@ -28,16 +28,31 @@
         </form>
     </div>
     <div id="output">
-    </div>
+    </div> -->
+    <header id="indexh">
+      <div id="intro">
+        <h1>news and weather</h1>
+    	  <h2 ><em>convenient tools</em></h2>
+      </div>
+     <!--  <div>
+        <img id="logo" src="img/logo.png" alt="logo" height="150">
+      </div>  -->
+    </header>     
+    <nav>
+      <h3>  
+      <a href=login.html>login</a>
+      <a href="main.html">spoti</a>
+    </nav>
     <div id="map"></div>
-    <div id="football">
+    <div id="event">
         <form>
-            <label for="team_search">search team:
-                <input type="text" id="team_search">
+            <label for="event_search">search event:
+                <input type="text" id="event_search">
             </label>
-            <input type="button" id="team_button" value="Search">
+            <input type="button" id="event_button" value="Search">
         </form>
     </div>
+
     <script src="js/search.js"></script>
 </body>
 </html>

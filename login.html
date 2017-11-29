@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    
+   
+</head>
+<body>
+
+    <header id="indexh">
+      <div id="intro">
+        <h1>log in</h1>
+
+      </div>
+
+    </header>     
+     <a href="" id="login">aaaa</a>
+     
+    <script>
+      var base_url='https://accounts.spotify.com/authorize';
+      var params1={
+    client_id: '46b019fac4c44b26ac9461998998f584',
+    response_type:'token',
+    redirect_uri:'http://127.0.0.1:8000/main.html',
+    show_dialog: true,
+    scope:'user-read-recently-played playlist-read-private'
+}
+
+var encodeParameters = function(params) {
+    // join all key value pairs and store in an array
+    var strArray = [];
+    for (var key in params) {
+        if (params.hasOwnProperty(key)) {
+            var paramString = key + "=" + params[key];
+            strArray.push(paramString);
+        }
+    }
+    // join everything in the array together
+    return strArray.join("&");
+}
+
+
+var query_url=base_url+"?"+encodeParameters(params1);
+console.log(query_url)
+var login_link=document.querySelector('#login');
+login.href=query_url;
+</script>
+</body>
+</html>

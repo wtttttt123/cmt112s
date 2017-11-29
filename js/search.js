@@ -1,15 +1,24 @@
 const API_KEY = "AIzaSyBXMfb_64i8JnGquOcYTi9hid2j83l4UQ4";
 
+
+const is="ad33a867c92741239eb71fcccb511f35"
+const iss="mz0jAgao0wxKi7ZL4y1HpHw0zJ61RVhBVoFK4mOw0bZuOEYoUTIyx2VK3ARa"
+
+
+
 var parseResponse = function() {
     var response = JSON.parse(this.response);
-    var items=response.items;
+    var items=response._embedded.events;
     console.log(response); 
     for (var i=0;i<items.length;i++){
-        var info=items[i].volumeInfo
-        console.log(info.title);
+        var info=items[i]
+        console.log(info.name);
         processresponce(info);
-    }
-       
+        var loc=info._embedded.venues[0].location
+        console.log(loc)
+        var marker1 = L.marker([loc.latitude, loc.longitude]).addTo(mymap);
+    }  
+
 }
 
 // Function to ensure parameters used in request are encoded correctly
@@ -26,45 +35,12 @@ var encodeParameters = function(params) {
     return strArray.join("&");
 }
 
-var doSearch = function() {
-    var search_term = encodeURIComponent(document.getElementById('search_term').value);
-    console.log(search_term);
-    var e = document.getElementById("sss");
-    var op =e.options[e.selectedIndex].value;
-    var a=search_term+'+'+op+':'+search_term;
-    parameters = {
-        key: API_KEY,
-        q: a,
-        maxResults: 40,
-    };
 
-    var xhttp = new XMLHttpRequest();
-    xhttp.addEventListener('load', parseResponse);
-    var url = 'https://www.googleapis.com/books/v1/volumes?' + encodeParameters(parameters);
-    console.log(url);
-    xhttp.open('GET', url);
-    xhttp.send();
-    var bb=document.getElementsByTagName("img");
-    var cc=document.getElementsByTagName("p");
-    Element.prototype.remove = function() {
-    this.parentElement.removeChild(this);
-    }
-    NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
-        for(var i = this.length - 1; i >= 0; i--) {
-            if(this[i] && this[i].parentElement) {
-                this[i].parentElement.removeChild(this[i]);
-            }
-        }
-    }
-    bb.remove();
-    cc.remove();
-
-}
 
 var processresponce=function(info){
 
     // document.getElementsByTagName("p").remove();
-    var item=document.createTextNode(info.title);
+    var item=document.createTextNode(info.name);
     var para=document.createElement("p");
     var body=document.getElementsByTagName("body")[0];
     para.appendChild(item);
@@ -88,40 +64,42 @@ var processresponce=function(info){
 
 }
 
-var search_button = document.getElementById('search_button');
-search_button.addEventListener('click', doSearch);
-
-
 var mymap = L.map('map').setView([51.505, -0.09], 13);
 var marker = L.marker([51.5, -0.09]).addTo(mymap);
 marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
 
+
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-    maxZoom: 18,
+    maxZoom: 7,
     id: 'mapbox.streets',
     accessToken: 'pk.eyJ1Ijoid3R0dHR0dDEyMyIsImEiOiJjamE5cWYwancwbDZzMndxZWpkNzRldHNxIn0.90ZN7qBm2mgV7ciNymNJZg',
 }).addTo(mymap);
 
-var football = function() {
-    var team_search = encodeURIComponent(document.getElementById('team_search').value);
-    console.log(team_search);
-    var f=team_search;
+
+var event = function() {
+    var event_search = encodeURIComponent(document.getElementById('event_search').value);
+    console.log(event_search);
     parameters = {
-        key: API_KEY,
-        q: f,
-        maxResults: 40,
+        
+        keyword: event_search,
+        size: 20,
+        apikey:'LYlkrschyiZZg7173JDdovwvgBllKXBP'
     };
 
     var xhttp2 = new XMLHttpRequest();
     xhttp2.addEventListener('load', parseResponse);
-    var url2 = 'http://api.football-data.org/v1/competitions/\?season\=2015'//+ encodeParameters(parameters);
+    var url2 = 'https://app.ticketmaster.com/discovery/v2/events.json?'+ encodeParameters(parameters);    
     console.log(url2);
     xhttp2.open('GET', url2);
-    xhttp2.setRequestHeader('X-Auth-Token', 'b76a0e98452d434184e2250adb5fb121');
+    //xhttp2.setRequestHeader('Authorization','Bearer' +'');
     xhttp2.send();
 
 };
 
-var team_button = document.getElementById('team_button');
-team_button.addEventListener('click', football);
+var event_button = document.getElementById('event_button');
+event_button.addEventListener('click', event);
+
+
+
+
