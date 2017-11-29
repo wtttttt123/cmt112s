@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Google Books Search (Week 7 Lab - CMT112)</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+   integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+   crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+   integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+   crossorigin=""></script>
+   
+</head>
+<body>
+    <div id="input">
+        <form>
+            <label for="search_term">Enter a term to search for:
+                <input type="text" id="search_term">
+            </label>
+            <select id="sss">
+              <option value="inauthor">Author</option>
+              <option value="intitle">Title</option>
+              <option value="inpublisher">Publisher</option>
+            </select>
+            <input type="button" id="search_button" value="Search">
+        </form>
+    </div>
+    <div id="output">
+    </div>
+    <div id="map"></div>
+    <div id="football">
+        <form>
+            <label for="team_search">search team:
+                <input type="text" id="team_search">
+            </label>
+            <input type="button" id="team_button" value="Search">
+        </form>
+    </div>
+    <script src="js/search.js"></script>
+</body>
+</html>

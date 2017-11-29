@@ -1,0 +1,34 @@
+body {
+    font-family: 'Montserrat', 'Helvetica Nueue', Helvetica, Arial, sans-serif;
+    font-size: 2em;
+}
+
+#input {
+    width: 70%;
+    text-align: center;
+    margin: auto;
+}
+
+input[type=text] {
+    border:2px solid #ccc; 
+    border-radius: 5px;
+}
+
+input[type=text]:focus {
+    border-color:#333; 
+}
+
+input[type=button] {
+    background-color: #eee;
+    border:0 none;
+    cursor:pointer;
+    border-radius: 5px;
+    font-family: 'Montserrat', 'Helvetica Nueue', Helvetica, Arial, sans-serif;
+    font-size: 1em;
+}
+
+#map {
+width: 960px;
+height: 500px;
+}
+    
