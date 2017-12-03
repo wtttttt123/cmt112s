@@ -5,19 +5,30 @@
 </head>
 <body>
 	<h1>bbbbb</h1>
+	<div id="output">
+		<ol>
+			
+		</ol>
+	</div>
+	<div id="pop">
+		<p>this is thw pop</p>
+		<p><span id=pop-number></span></p>
+		<img scr="" alt="" id="artistimg">
+	</div>
+
 	<script>
-	var encodeParameters = function(params) {
-    // join all key value pairs and store in an array
-    var strArray = [];
-    for (var key in params) {
-        if (params.hasOwnProperty(key)) {
-            var paramString = key + "=" + params[key];
-            strArray.push(paramString);
-        }
-    }
-    // join everything in the array together
-    return strArray.join("&");
-}
+		var encodeParameters = function(params) {
+		    // join all key value pairs and store in an array
+		    var strArray = [];
+		    for (var key in params) {
+		        if (params.hasOwnProperty(key)) {
+		            var paramString = key + "=" + params[key];
+		            strArray.push(paramString);
+		        }
+		    }
+		    // join everything in the array together
+		    return strArray.join("&");
+		}
 
 
 
@@ -36,14 +47,34 @@
 			return return_data;
 		}
 
+		var processResponce=function(items){
+    		var list=document.querySelector("#output ol");
+    		for (let i=0;i<items.length;i++){
+        		var list_item=document.createElement('li');
+        		var text_item=document.createTextNode(items[i].track.name+'---'+items[i].track.artists[0].name);
+        		list_item.addEventListener('mouseenter',function(){
+        			var popularity=items[i].track.popularity;
+        			var pop_span=document.querySelector('#pop-number');
+        			pop_span.innerHTML=popularity;
+        		});
+        		list_item.addEventListener('mouseleave',function(){
+        			var popularity=items[i].track.popularity;
+        			var pop_span=document.querySelector('#pop-number');
+        			pop_span.innerHTML=null;
+        		});
+        		list_item.appendChild(text_item);
+        		list.appendChild(list_item);
+		    }
+		}
+
+
 		var parameters=extract();
 
 		var access_token=parameters['access_token'];		
-		// var access_token='BQDb1QHH2LTKa8fpFWOz-tv3gx_8GeFnD62iNpwrb97RvGQBUk15NuCiXQuza2I9wWZcBZQIQfXOMcOG270rJoacioph6k2igRmEZ62bFfWnqDPpGB1EvEC-s9XqWcUOvmpI2SZw_XI8OlZCw1llsXSkNAs';	
 		console.log(access_token)
 		var recently_played_url='https://api.spotify.com/v1/me/player/recently-played'
 		var params={
-			limit:50
+			limit:20
 		}
 		var query_url=recently_played_url+'?'+encodeParameters(params);
 
@@ -56,10 +87,10 @@
     	xhttp.addEventListener('load', function(){
     		var response=JSON.parse(this.response)
     		console.log(response)
+    		processResponce(response.items)
     	});
     	
-
-
+    	
 
 	</script>
 

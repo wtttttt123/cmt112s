@@ -2,38 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>news and weather</title>
+    <title>music</title>
     <link rel="stylesheet" href="css/style.css">
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
-   integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
-   crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
-   integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
-   crossorigin=""></script>
-   
-</head>
 <body>
-<!--     <div id="input">
-        <form>
-            <label for="search_term">Enter a term to search for:
-                <input type="text" id="search_term">
-            </label>
-            <select id="sss">
-              <option value="inauthor">Author</option>
-              <option value="intitle">Title</option>
-              <option value="inpublisher">Publisher</option>
-            </select>
-            <input type="button" id="search_button" value="Search">
-        </form>
-    </div>
-    <div id="output">
-    </div> -->
+
     <header id="indexh">
-      <div id="intro">
-        <h1>news and weather</h1>
-    	  <h2 ><em>convenient tools</em></h2>
-      </div>
+        <h1>music and singer</h1>
+    	  <h2 ><em>excellent</em></h2>
+
      <!--  <div>
         <img id="logo" src="img/logo.png" alt="logo" height="150">
       </div>  -->
@@ -43,16 +20,21 @@
       <a href=login.html>login</a>
       <a href="main.html">spoti</a>
     </nav>
-    <div id="map"></div>
-    <div id="event">
-        <form>
+    
+    <div>
+        <form action="event.html" method="get" id="myform" >
             <label for="event_search">search event:
                 <input type="text" id="event_search">
             </label>
-            <input type="button" id="event_button" value="Search">
+            <input type="submit" id="event_button" value="Search">
         </form>
     </div>
 
-    <script src="js/search.js"></script>
+    <script type="text/javascript">
+      function submitform(){
+      document.getElementById('myform').submit();
+      }
+    </script>
+
 </body>
 </html>

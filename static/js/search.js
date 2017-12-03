@@ -42,29 +42,22 @@ var processresponce=function(info){
     // document.getElementsByTagName("p").remove();
     var item=document.createTextNode(info.name);
     var para=document.createElement("p");
-    var body=document.getElementsByTagName("body")[0];
+    var body=document.querySelector('#ppp');
     para.appendChild(item);
     para.id=item;  
-    para.addEventListener('click',function(){
-        console.log('this is the'+info.title+"by d!!!!!")
-    })
-    
     body.appendChild(para);
     if (info.imageLinks!=undefined){
         var img=document.createElement("img");
         img.src = info.imageLinks.smallThumbnail;
         body.appendChild(img);
-
     }
  
     
     // var link=document.createElement("a")
     // a.href = info.
-   
-
 }
 
-var mymap = L.map('map').setView([51.505, -0.09], 13);
+var mymap = L.map('mappp').setView([51.505, -0.09], 13);
 var marker = L.marker([51.5, -0.09]).addTo(mymap);
 marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
 
@@ -77,12 +70,31 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 }).addTo(mymap);
 
 
+
+    var extract=function(){
+            var query=window.location.search.substring(1);
+            var params=query.split("&"); 
+            var return_data={};
+            for (var i=0;i<params.length;i++){
+                var keyvalue=params[i].split('=');
+                console.log(keyvalue);
+                return_data[keyvalue[0]]=keyvalue[1]
+            }
+            return return_data;
+        }
+    var parameters=extract();
+
+    var searchh=parameters['search'];
+    console.log(searchh)    
+
 var event = function() {
-    var event_search = encodeURIComponent(document.getElementById('event_search').value);
-    console.log(event_search);
+    // var event_search = encodeURIComponent(document.getElementById('event_search').value);
+    // console.log(event_search);
+    
+
     parameters = {
         
-        keyword: event_search,
+        keyword: searchh,
         size: 20,
         apikey:'LYlkrschyiZZg7173JDdovwvgBllKXBP'
     };
@@ -97,8 +109,12 @@ var event = function() {
 
 };
 
-var event_button = document.getElementById('event_button');
-event_button.addEventListener('click', event);
+
+
+window.onload = event;
+
+// var event_button = document.getElementById('event_button');
+// event_button.addEventListener('click', event);
 
 
 
