@@ -1,0 +1,24 @@
+{
+  "name": "cmt112s",
+  "version": "0.0.1",
+  "description": "coursework",
+  "main": "server1.js",
+  "dependencies": {
+    "express": "^4.16.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wtttttt123/cmt112s.git"
+  },
+  "author": "tao",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wtttttt123/cmt112s/issues"
+  },
+  "homepage": "https://github.com/wtttttt123/cmt112s#readme"
+}
