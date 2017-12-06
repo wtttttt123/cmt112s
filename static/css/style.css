@@ -28,7 +28,75 @@ input[type=button] {
 }
 
 #mappp {
-width: 960px;
-height: 500px;
+width: 600px;
+height: 400px;
+float:right;
+
+}
+
+
+#ppp{
+    float:left;
+    font-size: 0.5em
+}
+
+
+#myform{
+    position: fixed;
+    right:30vw;
+    top:50vh;
+}
+
+#container1 {
+  position: relative;
+  width: 50%;
+  float: right;
+}
+#container2 {
+  position: relative;
+  width: 50%;
+  float: left;
+}
+
+
+#searchpic:after{
+    content: "."; 
+     display: block; 
+     height: 0; 
+     clear: both; 
+     visibility: hidden;
+}
+
+.hoverimg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #008CBA;
+}
+
+.container:hover .overlay {
+  opacity: 1;
+}
+
+.hovertxt {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
 }
     

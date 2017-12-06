@@ -8,33 +8,79 @@
 <body>
 
     <header id="indexh">
-        <h1>music and singer</h1>
+        <h1>music and concert</h1>
     	  <h2 ><em>excellent</em></h2>
 
      <!--  <div>
         <img id="logo" src="img/logo.png" alt="logo" height="150">
       </div>  -->
     </header>     
-    <nav>
+    <!-- <nav>
       <h3>  
       <a href=login.html>login</a>
       <a href="main.html">spoti</a>
-    </nav>
-    
+      </h3>
+    </nav> -->
+    <div id=searchpic>
+      <div class="container" id="container1">
+        <img src="img/event.jpeg" alt="eventpic" class="hoverimg" id="eventimg">
+        <div id="overlayevent" class="overlay">
+          <div id="eventtxt" class="hovertxt">search event</div>
+        </div>
+      </div>
+      <div class="container" id="container2">
+        <img src="img/song.png" alt="songpic" class="hoverimg" id="songimg">
+        <div id="overlaysong" class="overlay">
+          <div id="songtxt" class="hovertxt">search song</div>
+        </div>
+      </div>
+    </div>
     <div>
-        <form action="event.html" method="get" id="myform" >
-            <label for="event_search">search event:
-                <input type="text" id="event_search">
+        <form action="" method="GET" id="myform">
+            <input type="button" id="song_button" value="song" onclick="askForsong()"/>
+            <label for="event_search">:
+                <input type="text" name="search"  placeholder="enter your singer here">
             </label>
-            <input type="submit" id="event_button" value="Search">
+            <input type="button" id="event_button" value="event" onclick="askForevent()"/>
         </form>
     </div>
+    <script>
+        var form=document.getElementById("myform");
+        function askForevent() {
+                form.action="event.html";
+                form.submit();
+        }
+        function askForsong() {
+                form.action="login.html";
+                form.submit();
+        }
+        var qq=document.getElementById("scontent")
+        var eventss=document.getElementById("overlayevent");
+        eventss.addEventListener('click',askForevent);
+         var eventss=document.getElementById("overlaysong");
+        eventss.addEventListener('click',askForsong);
 
-    <script type="text/javascript">
-      function submitform(){
-      document.getElementById('myform').submit();
-      }
+      
+        //  var artp={
+        //   q: "jay",
+        //   type: "artist"
+        // }
+    
+        // var search_art_url='https://api.spotify.com/v1/search'
+        // var search_art=search_art_url+'?'+encodeParameters(artp);
+        // console.log(search_art)
+        // var xhttp1 = new XMLHttpRequest();
+        // xhttp1.open('GET', search_art);
+        // xhttp1.send();
+        // xhttp1.addEventListener('load', function(){
+        //   var response=JSON.parse(this.response)
+        //   console.log(response)
+        //   // processResponce1(response.artists)
+        // });
+      
+
+       
+        
     </script>
-
 </body>
 </html>
