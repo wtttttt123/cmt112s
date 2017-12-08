@@ -23,7 +23,7 @@
 			
 		</ol>
 	</div>
-	<button type="button" id='addlist'>add list!</button>
+	<button type="button" id='addlist'>Add Playlist!</button>
 	<script>
 		var user_id;
 		var listname='newwwwww list';
@@ -52,7 +52,9 @@
 		        }
 		    }
 		    cc.remove();
+		   	popid.length=0;
 			getSinger();
+
 		});
 
 
@@ -214,6 +216,7 @@
 			var response=JSON.parse(this.response);
 			user_id=response.id;
 			createPlayList(user_id);
+			alert("successful");
 			});
 		});
 
