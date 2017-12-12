@@ -20,13 +20,33 @@
      <a href="" id="login">login spotify</a>
      
     <script>
+        var mstate;
+
+
+        var extract=function(){
+            var query=window.location.search.substring(1);
+            var params=query.split("&"); 
+            var return_data={};
+            for (var i=0;i<params.length;i++){
+                var keyvalue=params[i].split('=');
+                console.log(keyvalue);
+                return_data[keyvalue[0]]=keyvalue[1]
+            }
+            return return_data;
+        }
+        var parameters=extract();
+
+        mstate=parameters['search'];
+        console.log(mstate)    
+
         var base_url='https://accounts.spotify.com/authorize';
         var params1={
             client_id: '46b019fac4c44b26ac9461998998f584',
             response_type:'token',
             redirect_uri:'http://127.0.0.1:8000/main.html',
             show_dialog: true,
-            scope:'user-read-recently-played playlist-read-private playlist-modify-public'
+            scope:'user-read-recently-played playlist-read-private playlist-modify-public',
+            state: mstate
         }
         
         var encodeParameters = function(params) {
@@ -47,22 +67,7 @@
         var login_link=document.querySelector('#login');
         login.href=query_url;
 
-        var extract=function(){
-            var query=window.location.search.substring(1);
-            var params=query.split("&"); 
-            var return_data={};
-            for (var i=0;i<params.length;i++){
-                var keyvalue=params[i].split('=');
-                console.log(keyvalue);
-                return_data[keyvalue[0]]=keyvalue[1]
-            }
-            return return_data;
-        }
-        var parameters=extract();
-
-        var searchh=parameters['search'];
-        console.log(searchh)    
-
+       
 </script>
 </body>
 </html>

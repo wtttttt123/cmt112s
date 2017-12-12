@@ -10,7 +10,7 @@
     <div>
     <form>
         <label for="event_search">singer:
-            <input type="text" name="search" id="ree">
+            <input type="text" name="state" id="ree">
         </label>
         <input type="button" id="singer_button" value="search">
     </form>
@@ -24,11 +24,12 @@
 		</ol>
 	</div>
 	<button type="button" id='addlist'>Add Playlist!</button>
+	<button type="button" id='redirectEvent'>Find His/Her Concert</button>
 	<script>
 		var user_id;
-		var listname='newwwwww list';
+		var listname;
 		var popid=[];
-		var qq="rihanna";
+		var qq;
 
 		// var research=document.getElementById("ree").value;
 		// console.log(research)
@@ -126,6 +127,11 @@
 			}
 			return return_data;
 		}
+		var parameters=extract();
+		qq=parameters['state'];
+		listname="New "+qq+" List"
+		console.log(qq)  
+
 
 		var processResponce=function(items){
     		var list=document.querySelector("#output ol");
@@ -222,6 +228,8 @@
 
 
     	var getSinger=function() {
+			listname=+qq+" Popular List"
+			console.log(qq)  
     		var artp={
 			q: qq,
 			type: "artist"
