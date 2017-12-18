@@ -1,7 +1,23 @@
 body {
     font-family: 'Montserrat', 'Helvetica Nueue', Helvetica, Arial, sans-serif;
     font-size: 2em;
+    box-sizing: border-box;
+    border:20px solid black;
+    margin:0;
 }
+#ebody{
+    /*background-image: url("../img/111.jpg");*/
+}
+
+footer{
+    background-color: black;
+    color: white;
+}
+h3{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 
 #input {
     width: 70%;
@@ -28,24 +44,63 @@ input[type=button] {
 }
 
 #mappp {
-width: 600px;
-height: 400px;
-float:right;
-
+    width: 600px;
+    height: 400px;
+    float:left;
+    margin-right: 20px;
+    margin-bottom: 40px
 }
 
 
 #ppp{
     float:left;
-    font-size: 0.5em
+    font-size: 0.5em;
+    width: 30%;
+
+}
+#mapcontainer:after{
+    content: "."; 
+     display: block; 
+     height: 0; 
+     clear: both; 
+     visibility: hidden;
 }
 
+
+
+
+
+@media (max-width: 929px) {
+    #mappp {
+    display: block;
+    width:90%;
+    }
+    #ppp {
+    display: block;
+    width:90%;
+    }
+}
 
 #myform{
     position: fixed;
-    right:30vw;
+    right:35vw;
     top:50vh;
 }
+#indexh{
+    position: fixed;
+    right:20vw;
+    top:30vh;
+    color: white;
+    border: 0;
+
+}
+h1,h2{
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+
+
 
 #container1 {
   position: relative;
@@ -73,21 +128,34 @@ float:right;
   height: auto;
 }
 
+
+
+/*#overlayevent{   
+    background-image:url("../img/concert.jpg");
+
+
+}
+#overlaysong{
+    background-image:url("../img/studio.jpg");
+
+}*/
+
 .overlay {
-  position: absolute;
+    display: none;
+    position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   height: 100%;
   width: 100%;
-  opacity: 0;
+/*  opacity: 0;*/
   transition: .5s ease;
-  background-color: #008CBA;
 }
 
 .container:hover .overlay {
-  opacity: 1;
+/*  opacity: 1;*/
+  display: inline;
 }
 
 .hovertxt {
@@ -99,4 +167,27 @@ float:right;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
 }
-    
+
+#artistimg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+#simg{
+    border:20px;
+    float:left;
+    width: 40%;
+    }
+
+#output{
+    float:right;
+    font-size: .5em;
+}    
+#scontainer:after{
+    content: "."; 
+     display: block; 
+     height: 0; 
+     clear: both; 
+     visibility: hidden;
+}

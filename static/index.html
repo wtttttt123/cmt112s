@@ -2,39 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>music</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MusiCURL</title>
     <link rel="stylesheet" href="css/style.css">
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
 <body>
-
-    <header id="indexh">
-        <h1>music and concert</h1>
-    	  <h2 ><em>excellent</em></h2>
-
-     <!--  <div>
-        <img id="logo" src="img/logo.png" alt="logo" height="150">
-      </div>  -->
-    </header>     
-    <!-- <nav>
-      <h3>  
-      <a href=login.html>login</a>
-      <a href="main.html">spoti</a>
-      </h3>
-    </nav> -->
     <div id=searchpic>
       <div class="container" id="container1">
-        <img src="img/event.jpeg" alt="eventpic" class="hoverimg" id="eventimg">
+        <img src="img/concertbk.jpg" alt="eventpic" class="hoverimg" id="eventimg">
+        <img src="img/concert.jpg" class="overlay" id="convertc">
         <div id="overlayevent" class="overlay">
           <div id="eventtxt" class="hovertxt">search event</div>
         </div>
       </div>
       <div class="container" id="container2">
-        <img src="img/song.png" alt="songpic" class="hoverimg" id="songimg">
+        <img src="img/studiobk.jpg" alt="songpic" class="hoverimg" id="songimg">
+         <img src="img/studio.jpg" class="overlay" id="eventc">
         <div id="overlaysong" class="overlay">
           <div id="songtxt" class="hovertxt">search song</div>
         </div>
       </div>
     </div>
+
+    <header id="indexh">
+        <h1>MusiCURL</h1>
+        <h2 ><em>Find Music and Concert</em></h2>
+    </header>    
     <div>
         <form action="" method="GET" id="myform">
             <input type="button" id="song_button" value="song" onclick="askForsong()"/>
@@ -44,6 +37,9 @@
             <input type="button" id="event_button" value="event" onclick="askForevent()"/>
         </form>
     </div>
+    <footer>
+        <h3 class="copyright">&copy;copyright </h3>
+    </footer>
     <script>
         var form=document.getElementById("myform");
         function askForevent() {
@@ -59,27 +55,6 @@
         eventss.addEventListener('click',askForevent);
          var eventss=document.getElementById("overlaysong");
         eventss.addEventListener('click',askForsong);
-
-      
-        //  var artp={
-        //   q: "jay",
-        //   type: "artist"
-        // }
-    
-        // var search_art_url='https://api.spotify.com/v1/search'
-        // var search_art=search_art_url+'?'+encodeParameters(artp);
-        // console.log(search_art)
-        // var xhttp1 = new XMLHttpRequest();
-        // xhttp1.open('GET', search_art);
-        // xhttp1.send();
-        // xhttp1.addEventListener('load', function(){
-        //   var response=JSON.parse(this.response)
-        //   console.log(response)
-        //   // processResponce1(response.artists)
-        // });
-      
-
-       
         
     </script>
 </body>

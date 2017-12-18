@@ -1,41 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>event</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
 	<title>spotify</title>
 </head>
 <body>
-
 	<h1>the singer's popular songs</h1>
-	<a href=index.html>back</a>
-    <div>
+	<h2><a href=index.html>Back</a></h2>
+	<!-- <a href=event.html>Find His/Her Concert </a> -->
     <form>
         <label for="event_search">singer:
             <input type="text" name="state" id="ree">
         </label>
         <input type="button" id="singer_button" value="search">
     </form>
-    </div>
-	<div id="simg">
-		<img src="" alt="songer" id="artistimg">
-	</div>
-	<div id="output">
-		<ol>
+	<div id="scontainer">
+		<div id="simg">
+			<img src="" alt="songer" id="artistimg">
+		</div>
+		<div id="output">
+			<ol>
 			
-		</ol>
+			</ol>
+			<button type="button" id='addlist'>Add Playlist!</button>
+		</div>
 	</div>
-	<button type="button" id='addlist'>Add Playlist!</button>
-	<button type="button" id='redirectEvent'>Find His/Her Concert</button>
+	<footer>
+        <h3 class="copyright">&copy;copyright </h3>
+    </footer>
+	
 	<script>
 		var user_id;
 		var listname;
 		var popid=[];
 		var qq;
-
-		// var research=document.getElementById("ree").value;
-		// console.log(research)
-		// if (research==undefined){
-		// 	qq = "rihanna";
-		// };
 
 
 		var searchbutton=document.getElementById("singer_button")
@@ -128,7 +130,10 @@
 			return return_data;
 		}
 		var parameters=extract();
-		qq=parameters['state'];
+		if (parameters['state']==""){
+			qq="Li Zhi"
+		}
+		else{qq=parameters['state'];}
 		listname="New "+qq+" List"
 		console.log(qq)  
 
@@ -181,22 +186,7 @@
 
 		var access_token=parameters['access_token'];		
 		console.log(access_token)
-		// var recently_played_url='https://api.spotify.com/v1/me/player/recently-played'
-		// var params={
-		// 	limit:20
-		// }
-		// var query_url=recently_played_url+'?'+encodeParameters(params);
-		// var xhttp = new XMLHttpRequest();
-  //   	console.log(query_url);
-  //   	xhttp.open('GET', query_url);
-  //   	xhttp.setRequestHeader('Authorization','Bearer '+access_token);
-  //   	xhttp.send();
-  //   	xhttp.addEventListener('load', function(){
-  //   		var response=JSON.parse(this.response)
-  //   		console.log(response)
-  //   		processResponce(response.items)
-  //   	});
-    	
+
     	var getSong=function(id){
     		var song_url="https://api.spotify.com/v1/artists/"+id+"/top-tracks?country=GB"
     		var xhttp = new XMLHttpRequest();

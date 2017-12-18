@@ -18,7 +18,7 @@ var parseResponse = function() {
         var loc=items[i]._embedded.venues[0].location
         console.log(loc)
         markers[items[i].id]=(L.marker([loc.latitude, loc.longitude]))
-        markers[items[i].id].bindPopup("<b>"+"<a href="+items[i].url+">"+(i+1)+"."+items[i].name+"</a>"+"</b><br>"+items[i].dates.start.localDate+"<br>"+items[i]._embedded.venues[0].country.name+"<br>"+items[i]._embedded.venues[0].city.name)
+        markers[items[i].id].bindPopup("<b>"+"<a href="+items[i].url+" target=_blank>"+(i+1)+"."+items[i].name+"</a>"+"</b><br>"+items[i].dates.start.localDate+"<br>"+items[i]._embedded.venues[0].country.name+"<br>"+items[i]._embedded.venues[0].city.name)
         markerArray.push(markers[items[i].id])
         markers[items[i].id].on('click', function(){
         this.openPopup();
