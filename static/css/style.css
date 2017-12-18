@@ -183,7 +183,20 @@ h1,h2{
 #output{
     float:right;
     font-size: .5em;
+    width: 30%;
 }    
+
+#relart{
+    /*float:left;*/
+    font-size: .3em;
+}
+
+#relart li{
+    display: inline-block;
+    margin: 10px;
+}
+
+
 #scontainer:after{
     content: "."; 
      display: block; 

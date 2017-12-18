@@ -28,7 +28,13 @@
 			</ol>
 			<button type="button" id='addlist'>Add Playlist!</button>
 		</div>
+		
 	</div>
+	<div id="relart">
+			<ul>
+			
+			</ul>
+		</div> 
 	<footer>
         <h3 class="copyright">&copy;copyright </h3>
     </footer>
@@ -131,7 +137,7 @@
 		}
 		var parameters=extract();
 		if (parameters['state']==""){
-			qq="Li Zhi"
+			qq="Beatles"
 		}
 		else{qq=parameters['state'];}
 		listname="New "+qq+" List"
@@ -162,22 +168,46 @@
 		};
 
 		var processResponce1=function(items){
-    		var list=document.querySelector("#output ol");
-    		for (let i=0;i<items.items.length;i++){
+    		var list=document.querySelector("#relart ul");
+    		for (let i=0;i<5;i++){
         		var list_item=document.createElement('li');
-        		var text_item=document.createTextNode(items.items[i].name+'---');
-        		list_item.addEventListener('mouseenter',function(){
-        			var popularity=items[i].track.popularity;
-        			var pop_span=document.querySelector('#pop-number');
-        			pop_span.innerHTML=popularity;
-        		});
-        		list_item.addEventListener('mouseleave',function(){
-        			var popularity=items[i].track.popularity;
-        			var pop_span=document.querySelector('#pop-number');
-        			pop_span.innerHTML=null;
-        		});
-        		list_item.appendChild(text_item);
-        		list.appendChild(list_item);
+        		var text_item=document.createTextNode(items[i].name);
+
+        		var br=document.createElement('p');
+        		// list.appendChild(list_item);
+        		if (items[i].images!=undefined){
+        		var img=document.createElement("img");
+        		img.src = items[i].images[0].url;
+        		img.width=150;
+        		img.height=150;
+        		// var list_item_imqge=document.createElement('li');
+        		list_item.appendChild(img)
+    			};
+    			
+    			var abutton = document.createElement('button');
+    			abutton.innerHTML=items[i].name;
+    			abutton.addEventListener ("click", function() {
+				qq=this.innerHTML;
+				var cc=document.getElementsByTagName("li");
+	    		Element.prototype.remove = function() {
+	    		this.parentElement.removeChild(this);
+	    		}
+	    		NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
+	        	for(var i = this.length - 1; i >= 0; i--) {
+		            if(this[i] && this[i].parentElement) {
+		                this[i].parentElement.removeChild(this[i]);
+				            }
+				        }
+				    }
+			    cc.remove();
+			   	popid.length=0;
+				getSinger();
+				});
+				
+				br.appendChild(abutton);
+    			list_item.appendChild(br);
+    			list.appendChild(list_item);
+    			
 		    }
 		};
 
@@ -200,6 +230,23 @@
 
 	    	});
     	};
+    	var getrelated=function(id){
+    		var re_url="https://api.spotify.com/v1/artists/"+id+"/related-artists"
+    		var xhttp = new XMLHttpRequest();
+	    	xhttp.open('GET', re_url);
+	    	xhttp.setRequestHeader('Authorization','Bearer '+access_token);
+	    	xhttp.send();
+	    	xhttp.addEventListener('load', function(){
+	    		var response=JSON.parse(this.response);
+	    		console.log(response);
+	    		processResponce1(response.artists);
+
+	    	});
+    	};
+
+
+
+
 
     	var add_list=document.querySelector("#addlist");
 	    add_list.addEventListener('click', function(){
@@ -238,6 +285,7 @@
 	    		var simg=response.artists.items[0].images[0].url;
 	    		console.log(response.artists.items[0].id);
 	    		getSong(singer_id);
+	    		getrelated(singer_id);
 	    		setimg(simg);
 	    	});
 	    }
