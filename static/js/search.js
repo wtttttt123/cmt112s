@@ -1,9 +1,3 @@
-const API_KEY = "AIzaSyBXMfb_64i8JnGquOcYTi9hid2j83l4UQ4";
-
-
-const is="ad33a867c92741239eb71fcccb511f35"
-const iss="mz0jAgao0wxKi7ZL4y1HpHw0zJ61RVhBVoFK4mOw0bZuOEYoUTIyx2VK3ARa"
-
 var markers={}; 
 var searchh;
 var markerArray = [];
@@ -45,9 +39,7 @@ var encodeParameters = function(params) {
 
 
 var processresponce=function(info){
-
-    // document.getElementsByTagName("p").remove();
-    var item=document.createTextNode(info.name+'---'+info.dates.start.localDate);
+    var item=document.createTextNode(info.name+'('+info.dates.start.localDate+')');
     var para=document.createElement("li");
     var body=document.querySelector('#ppp');
     para.appendChild(item);
@@ -63,12 +55,9 @@ var processresponce=function(info){
         markers[para.id].openPopup();
         var latLngs = [ markers[para.id].getLatLng() ];
         var markerBounds = L.latLngBounds(latLngs);
-        mymap.fitBounds(markerBounds);
-
-        
+        mymap.fitBounds(markerBounds);        
     })
-    // var link=document.createElement("a")
-    // a.href = info.
+
 }
 
 var mymap = L.map('mappp').setView([51.505, -0.09], 13);
@@ -121,36 +110,6 @@ var event1 = function() {
 
 event1();
 
-// var searchbutton=document.getElementById("event_button")
-
-// searchbutton.addEventListener("click",function(){
-//     searchh=document.getElementById("ree").value;
-//     var cc=document.getElementsByTagName("li");
-//     Element.prototype.remove = function() {
-//     this.parentElement.removeChild(this);
-//     }
-//     NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
-//     for(var i = this.length - 1; i >= 0; i--) {
-//     if(this[i] && this[i].parentElement) {
-//         this[i].parentElement.removeChild(this[i]);
-//             }
-//         }
-//     }
-//     cc.remove();
-//     for(i=0;i<markerArray.length;i++) {
-//     mymap.removeLayer(markerArray[i]);
-//     }
-//     console.log(markers);
-//     for (var key in markers) {
-//         if (markers.hasOwnProperty(key)) {
-//         mymap.removeLayer(markers[key]);
-//         delete markers[key];
-//         delete markers.key;
-//         }
-//     };
-//     console.log(markers);
-//     event1();
-// });
 
 
 

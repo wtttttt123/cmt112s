@@ -9,15 +9,17 @@
 	<title>spotify</title>
 </head>
 <body>
-	<h1>the singer's popular songs</h1>
-	<h2><a href=index.html>Back</a></h2>
-	<!-- <a href=event.html>Find His/Her Concert </a> -->
-    <form>
-        <label for="event_search">singer:
-            <input type="text" name="state" id="ree">
-        </label>
-        <input type="button" id="singer_button" value="search">
-    </form>
+	<h1 class="sub">The singer's popular songs</h1>
+	<nav class="navcontainer">
+		<h3 class="backk"><a href=index.html>Back</a></h3>
+	    <form class="reeform">
+	        <label for="event_search">singer:
+	            <input type="text" name="state" id="ree">
+	        </label>
+	        <input type="button" id="singer_button" value="search">
+	    </form>
+	</nav>
+	<p id="sname"><p>
 	<div id="scontainer">
 		<div id="simg">
 			<img src="" alt="songer" id="artistimg">
@@ -28,13 +30,13 @@
 			</ol>
 			<button type="button" id='addlist'>Add Playlist!</button>
 		</div>
-		
 	</div>
 	<div id="relart">
+			<p id=rep>related artists</p>
 			<ul>
 			
 			</ul>
-		</div> 
+	</div> 
 	<footer>
         <h3 class="copyright">&copy;copyright </h3>
     </footer>
@@ -50,6 +52,7 @@
 		searchbutton.addEventListener("click",function(){
 			qq=document.getElementById("ree").value;
 			var cc=document.getElementsByTagName("li");
+			var dd=document.getElementsByTagName("em");
     		Element.prototype.remove = function() {
     		this.parentElement.removeChild(this);
     		}
@@ -60,6 +63,7 @@
 		            }
 		        }
 		    }
+		    dd.remove();
 		    cc.remove();
 		   	popid.length=0;
 			getSinger();
@@ -100,10 +104,11 @@
 				var playlist_id=response.id;
 				addTracks(user_id,playlist_id);
 			});
+			listname="New "+qq+" List";
 			var params={
 				name:listname,
 				public:true,
-				description:'aaa'
+				description:"Fabulous!"
 			};	
     		xhttp.send(JSON.stringify(params));
     		
@@ -140,27 +145,21 @@
 			qq="Beatles"
 		}
 		else{qq=parameters['state'];}
-		listname="New "+qq+" List"
+		
 		console.log(qq)  
 
 
 		var processResponce=function(items){
     		var list=document.querySelector("#output ol");
+    		var sname=document.querySelector("#sname");
+        	var namenode=document.createTextNode(qq);
+        	var emm=document.createElement('em');
+        	emm.appendChild(namenode);
+        	sname.appendChild(emm);
     		for (let i=0;i<items.length;i++){
         		var list_item=document.createElement('li');
         		var text_item=document.createTextNode(items[i].name+'---'+'<'+items[i].album.name+'>---'+items[i].artists[0].name);
-
         		popid.push('spotify:track:'+items[i].id)
-        		// list_item.addEventListener('mouseenter',function(){
-        		// 	var popularity=items[i].track.popularity;
-        		// 	var pop_span=document.querySelector('#pop-number');
-        		// 	pop_span.innerHTML=popularity;
-        		// });
-        		// list_item.addEventListener('mouseleave',function(){
-        		// 	var popularity=items[i].track.popularity;
-        		// 	var pop_span=document.querySelector('#pop-number');
-        		// 	pop_span.innerHTML=null;
-        		// });
         		list_item.appendChild(text_item);
         		list.appendChild(list_item);
         	
@@ -281,12 +280,21 @@
 	    	xhttp.addEventListener('load', function(){
 	    		var response=JSON.parse(this.response);
 	    		console.log(response);
+	    		if (response.artists.items[0]!==undefined){
 	    		var singer_id=response.artists.items[0].id;
 	    		var simg=response.artists.items[0].images[0].url;
 	    		console.log(response.artists.items[0].id);
 	    		getSong(singer_id);
 	    		getrelated(singer_id);
-	    		setimg(simg);
+	    		setimg(simg);}
+	    		else{
+	    			setimg("img/111.jpg");
+	    			var list=document.querySelector("#output ol");
+	    			var list_item=document.createElement('li');
+        			var text_item=document.createTextNode("Could not find the singer");
+        			list_item.appendChild(text_item);
+        			list.appendChild(list_item);
+	    		}
 	    	});
 	    }
   

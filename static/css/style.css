@@ -4,6 +4,8 @@ body {
     box-sizing: border-box;
     border:20px solid black;
     margin:0;
+    background-color: black;
+    color: white;
 }
 #ebody{
     /*background-image: url("../img/111.jpg");*/
@@ -12,6 +14,7 @@ body {
 footer{
     background-color: black;
     color: white;
+    font-size: 20px;
 }
 h3{
     margin-top: 0;
@@ -43,19 +46,28 @@ input[type=button] {
     font-size: 1em;
 }
 
+
+
+/*event.html*/
+
+
 #mappp {
     width: 600px;
     height: 400px;
     float:left;
-    margin-right: 20px;
-    margin-bottom: 40px
+    padding:20px;
+    border:2px solid #ff9933;
+    margin:20px;
 }
 
 
 #ppp{
-    float:left;
-    font-size: 0.5em;
+    float:right;
+    font-size: 17px;
     width: 30%;
+    padding:35px;
+    border:2px solid #ff9933;
+    margin:20px;
 
 }
 #mapcontainer:after{
@@ -83,7 +95,7 @@ input[type=button] {
 
 #myform{
     position: fixed;
-    right:35vw;
+    right:36vw;
     top:50vh;
 }
 #indexh{
@@ -168,32 +180,82 @@ h1,h2{
   -ms-transform: translate(-50%, -50%);
 }
 
+
+/*main.html*/
+
+.sub{
+    padding: 10px;
+    color: #ff9933;
+    font-family:sans-serif ;
+}
+
+
+
+
+.navcontainer{
+    display: flex;
+    flex-direction: row-reverse;
+    margin-bottom: 10px;
+    border-bottom:2px solid blue; 
+    border-top:2px solid blue; 
+}
+
+.backk{
+    padding: 10px;
+    background-color: #6666ff;
+    flex-grow:1;
+    text-align: end;
+}
+
+.reeform{
+    background-color: #6666ff;
+    padding: 10px;
+    flex-grow:1;
+    
+}
+
+
 #artistimg {
   display: block;
   width: 100%;
   height: auto;
+
 }
 
 #simg{
-    border:20px;
+    padding:20px;
     float:left;
     width: 40%;
+    border:2px solid #ff9933;
+    margin-left:20px;
+    
+
     }
 
 #output{
     float:right;
     font-size: .5em;
     width: 30%;
+    padding:10px;
+    border:2px solid #ff9933;
+    margin-right: 100px;
 }    
 
+
 #relart{
-    /*float:left;*/
+    padding:20px;
     font-size: .3em;
+    border:2px solid #ff9933;
+    margin:20px;
+
+}
+#rep{
+    font-size: 3em;
 }
 
 #relart li{
     display: inline-block;
-    margin: 10px;
+    margin: 30px;
 }
 
 
@@ -203,4 +265,18 @@ h1,h2{
      height: 0; 
      clear: both; 
      visibility: hidden;
+}
+
+
+
+
+
+/*login.html*/
+#loginh{
+    background-color: #6666ff;
+}
+
+
+#login{
+    padding-top:30px;
 }
