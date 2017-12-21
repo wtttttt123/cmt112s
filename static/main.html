@@ -3,17 +3,16 @@
 <head>
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>event</title>
+    <title>pop songs</title>
     <link rel="stylesheet" href="css/style.css">
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-	<title>spotify</title>
 </head>
 <body>
 	<h1 class="sub">The singer's popular songs</h1>
 	<nav class="navcontainer">
 		<h3 class="backk"><a href=index.html>Back</a></h3>
 	    <form class="reeform">
-	        <label for="event_search">singer:
+	        <label for="ree">singer:
 	            <input type="text" name="state" id="ree">
 	        </label>
 	        <input type="button" id="singer_button" value="search">
@@ -22,7 +21,7 @@
 	<p id="sname"><p>
 	<div id="scontainer">
 		<div id="simg">
-			<img src="" alt="songer" id="artistimg">
+			<img src='404.jpg' alt="songer" id="artistimg">
 		</div>
 		<div id="output">
 			<ol>
@@ -154,6 +153,7 @@
     		var sname=document.querySelector("#sname");
         	var namenode=document.createTextNode(qq);
         	var emm=document.createElement('em');
+        	emm.id="emname"
         	emm.appendChild(namenode);
         	sname.appendChild(emm);
     		for (let i=0;i<items.length;i++){

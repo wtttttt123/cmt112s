@@ -2,20 +2,18 @@ body {
     font-family: 'Montserrat', 'Helvetica Nueue', Helvetica, Arial, sans-serif;
     font-size: 2em;
     box-sizing: border-box;
-    border:20px solid black;
     margin:0;
-    background-color: black;
-    color: white;
-}
-#ebody{
-    /*background-image: url("../img/111.jpg");*/
+    /*background-color: black;
+    color: white;*/
 }
 
 footer{
+    margin-top:30px;
     background-color: black;
     color: white;
     font-size: 20px;
 }
+
 h3{
     margin-top: 0;
     margin-bottom: 0;
@@ -50,6 +48,12 @@ input[type=button] {
 
 /*event.html*/
 
+#loc{
+    margin: 20px;
+    margin-top:0;
+    margin-bottom: 0;
+}
+
 
 #mappp {
     width: 600px;
@@ -77,12 +81,15 @@ input[type=button] {
      clear: both; 
      visibility: hidden;
 }
+li{
+    margin: 10px;
+    font-family: Helvetica;
+}
 
 
 
 
-
-@media (max-width: 929px) {
+@media (max-width: 1140px) {
     #mappp {
     display: block;
     width:90%;
@@ -90,6 +97,7 @@ input[type=button] {
     #ppp {
     display: block;
     width:90%;
+    margin-left: 10px;
     }
 }
 
@@ -140,18 +148,6 @@ h1,h2{
   height: auto;
 }
 
-
-
-/*#overlayevent{   
-    background-image:url("../img/concert.jpg");
-
-
-}
-#overlaysong{
-    background-image:url("../img/studio.jpg");
-
-}*/
-
 .overlay {
     display: none;
     position: absolute;
@@ -186,11 +182,7 @@ h1,h2{
 .sub{
     padding: 10px;
     color: #ff9933;
-    font-family:sans-serif ;
 }
-
-
-
 
 .navcontainer{
     display: flex;
@@ -214,7 +206,11 @@ h1,h2{
     
 }
 
-
+#sname{
+    padding-left:20px;
+    margin-bottom: 0;
+    margin-top:20px;
+}
 #artistimg {
   display: block;
   width: 100%;
@@ -266,7 +262,6 @@ h1,h2{
      clear: both; 
      visibility: hidden;
 }
-
 
 
 
