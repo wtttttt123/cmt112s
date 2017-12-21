@@ -12,8 +12,18 @@ var parseResponse = function() {
         var loc=items[i]._embedded.venues[0].location
         console.log(loc)
         markers[items[i].id]=(L.marker([loc.latitude, loc.longitude]))
-        markers[items[i].id].bindPopup("<b>"+"<a href="+items[i].url+" target=_blank>"+(i+1)+"."+items[i].name+"</a>"+"</b><br>"+items[i].dates.start.localDate+"<br>"+items[i]._embedded.venues[0].country.name+"<br>"+items[i]._embedded.venues[0].city.name)
-        markerArray.push(markers[items[i].id])
+        if (items[i].priceRanges!=undefined){
+        markers[items[i].id].bindPopup("<b>"+"<a href="+items[i].url+" target=_blank>"+(i+1)+"."+items[i].name+"</a>"+"</b><br>"
+            +items[i].dates.start.localDate+"<br>"+items[i]._embedded.venues[0].country.name+"<br>"
+            +items[i]._embedded.venues[0].city.name+"<br>"+"$"+items[i].priceRanges[0].min+"--$"+items[i].priceRanges[0].max)
+        }
+
+        else {
+            markers[items[i].id].bindPopup("<b>"+"<a href="+items[i].url+" target=_blank>"+(i+1)+"."+items[i].name+"</a>"+"</b><br>"
+            +items[i].dates.start.localDate+"<br>"+items[i]._embedded.venues[0].country.name+"<br>"
+            +items[i]._embedded.venues[0].city.name)
+        }
+        markerArray.push(markers[items[i].id]);
         markers[items[i].id].on('click', function(){
         this.openPopup();
     })
@@ -62,10 +72,10 @@ var processresponce=function(info){
 
 var mymap = L.map('mappp').setView([51.505, -0.09], 13);
 var marker = L.marker([51.5, -0.09]).addTo(mymap);
-marker.bindPopup("<b>Hello world!</b><br>I am a popup.");
-marker.on('click', function(){
-        this.openPopup();
-    })
+// marker.bindPopup("<b>Hello world!</b><br>I am a popup.");
+// marker.on('click', function(){
+//         this.openPopup();
+//     })
 
 
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {

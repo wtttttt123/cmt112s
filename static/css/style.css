@@ -101,6 +101,7 @@ li{
     }
 }
 
+
 #indexh{
     position: fixed;
     right:20vw;
@@ -171,7 +172,7 @@ h1,h2{
 }
 
 
-/*main.html*/
+/*song.html*/
 
 .sub{
     padding: 10px;
@@ -184,6 +185,14 @@ h1,h2{
     margin-bottom: 10px;
     border-bottom:2px solid blue; 
     border-top:2px solid blue; 
+}
+
+#sss{
+    width: 150px;
+    font-size: 1em;
+    font-family: 'Montserrat';
+    border:0 none;
+
 }
 
 .backk{
