@@ -8,7 +8,6 @@ body {
 }
 
 footer{
-    margin-top:30px;
     background-color: black;
     color: white;
     font-size: 20px;
@@ -89,17 +88,7 @@ li{
 
 
 
-@media (max-width: 1140px) {
-    #mappp {
-    display: block;
-    width:90%;
-    }
-    #ppp {
-    display: block;
-    width:90%;
-    margin-left: 10px;
-    }
-}
+
 
 
 #indexh{
@@ -227,18 +216,23 @@ h1,h2{
     width: 40%;
     border:2px solid #ff9933;
     margin-left:20px;
-    
-
     }
 
 #output{
     float:right;
     font-size: .5em;
-    width: 30%;
+    width: 50%;
     padding:10px;
     border:2px solid #ff9933;
-    margin-right: 100px;
+    margin-right:20px;
 }    
+
+#backb{
+    width: 80px;
+    height: 50px;
+    /*font-size: .7em;*/
+    margin-left:400px;
+}
 
 
 #relart{
@@ -278,3 +272,39 @@ h1,h2{
 #login{
     padding-top:30px;
 }
+
+#loginb{
+    background-image: url("/img/111.jpg");
+}
+
+@media (max-width: 1140px) {
+    #mappp {
+    display: block;
+    width:90%;
+    }
+    #ppp {
+    display: block;
+    width:90%;
+    margin-left: 10px;
+    }
+}
+
+
+
+@media (max-width: 1085px) {
+    #simg{
+        display: block;
+        width: 90%;
+        margin: auto;
+        float:none;
+        margin-bottom: 20px;
+    }
+
+    #output{
+        display: block;
+        width: 90%;
+        margin: auto;
+        float:none;
+    }    
+}
+

@@ -53,7 +53,19 @@
 
 		var searchbutton=document.getElementById("singer_button")
 		searchbutton.addEventListener("click",function(){
+			cleaner();
 			qq=document.getElementById("ree").value;
+			var select=document.getElementById('sss').value;
+			if(select=="fsin"){
+				getSinger();
+			}
+			else if (select=="falb"){
+				getaa();
+			}
+		});
+
+
+		var cleaner=function(){
 			var cc=document.getElementsByTagName("li");
 			var dd=document.getElementsByTagName("em");
     		Element.prototype.remove = function() {
@@ -69,18 +81,8 @@
 		    dd.remove();
 		    cc.remove();
 		   	popid.length=0;
-			var select=document.getElementById('sss').value;
-			
-			if(select=="fsin"){
-				getSinger();
-			}
-			else if (select=="falb"){
-				getaa();
-			}
 
-		});
-
-
+		};
 
 		var setimg=function(imgurl){
 			var imgg=document.querySelector("#artistimg");
@@ -152,11 +154,22 @@
 		}
 		var parameters=extract();
 		if (parameters['state']==""){
-			qq="Beatles"
+			var textArray = [
+    		'Beatles',
+    		'Taylor swift',
+    		'Rihanna',
+    		'Pink Floyd',
+    		'Doors',
+    		'Bruno Mars'];
+			var randomNumber = Math.floor(Math.random()*textArray.length);
+
+			qq=textArray[randomNumber]
 		}
 		else{qq=parameters['state'];}
 		
-		console.log(qq)  
+		console.log(qq);  
+
+
 
 
 		var processResponce=function(items){
@@ -174,21 +187,7 @@
         		var abutton = document.createElement('button');
     			abutton.innerHTML="-"+items[i].album.name;
     			abutton.addEventListener ("click", function() {
-    				var cc=document.getElementsByTagName("li");
-					var dd=document.getElementsByTagName("em");
-		    		Element.prototype.remove = function() {
-		    		this.parentElement.removeChild(this);
-		    		}
-		    		NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
-		        	for(var i = this.length - 1; i >= 0; i--) {
-			            if(this[i] && this[i].parentElement) {
-			                this[i].parentElement.removeChild(this[i]);
-					            }
-					        }
-					    }
-					dd.remove();
-				    cc.remove();
-				   	popid.length=0;
+				 	cleaner();
 	    			var select=document.getElementById('sss');
 	    			select.value="falb";
 	    			window.scrollTo(0, 0);
@@ -199,6 +198,7 @@
 	    			getSong1(a_id);
 	    			var ren=items[i].album.artists;
 	    			getrelated(ren[0].id);
+	    			backToaArtist(ren);
 	    			});
         		popid.push('spotify:track:'+items[i].id);
         		list_item.appendChild(text_item);
@@ -207,6 +207,25 @@
 	        	
 		    }
 		};
+
+		var backToaArtist=function(ren){
+			var abutton = document.createElement('button');
+    			abutton.innerHTML="Go to the Artist";
+    			abutton.id="backb";
+    			var output=document.getElementById('output')
+    			output.appendChild(abutton);
+    			abutton.addEventListener ("click", function() {
+    				cleaner();
+    				qq=ren[0].name;
+    				getSinger();
+    				this.remove();
+    				var select=document.getElementById('sss');
+	    			select.value="fsin";
+    			});
+    			
+		}
+
+
 
 		
 		var aprocessResponce=function(items){
@@ -254,21 +273,7 @@
 	    			select.value="fsin";
 	    			window.scrollTo(0, 0);
 					qq=this.innerHTML;
-					var cc=document.getElementsByTagName("li");
-					var dd=document.getElementsByTagName("em");
-		    		Element.prototype.remove = function() {
-		    		this.parentElement.removeChild(this);
-		    		}
-		    		NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
-		        	for(var i = this.length - 1; i >= 0; i--) {
-			            if(this[i] && this[i].parentElement) {
-			                this[i].parentElement.removeChild(this[i]);
-					            }
-					        }
-					    }
-					dd.remove();
-				    cc.remove();
-				   	popid.length=0;
+				 	cleaner();
 					getSinger();
 				});
 				br.appendChild(abutton);
@@ -396,15 +401,16 @@
 	    		var response=JSON.parse(this.response);
 	    		console.log(response);
 	    		if (response.albums.items[0]!==undefined){
-	    		var al_id=response.albums.items[0].id;
-	    		zname=response.albums.items[0].name;
-	    		var singer_id=response.albums.items[0].artists[0].id;
-	    		var simg=response.albums.items[0].images[0].url;
-	    		console.log(response.albums.items[0].id);
-	    		getSong1(al_id);
-	    		// precessunder(response.albums.items)
-	    		getrelated(singer_id);
-	    		setimg(simg);}
+		    		var al_id=response.albums.items[0].id;
+		    		zname=response.albums.items[0].name;
+		    		var singer_id=response.albums.items[0].artists[0].id;
+		    		var simg=response.albums.items[0].images[0].url;
+		    		console.log(response.albums.items[0].id);
+		    		getSong1(al_id);
+		    		getrelated(singer_id);
+		    		setimg(simg);
+		    		backToaArtist(response.albums.items[0].artists);
+	    		}
 	    		else{
 	    			setimg("img/111.jpg");
 	    			var list=document.querySelector("#output ol");
