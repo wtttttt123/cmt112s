@@ -24,7 +24,7 @@
 	<p id="sname"><p>
 	<div id="scontainer">
 		<div id="simg">
-			<img src='' alt="songer" id="artistimg">
+			<img src='placeholder.jpg' alt="songer" id="artistimg">
 		</div>
 		<div id="output">
 			<ol>
@@ -273,6 +273,9 @@
 	    			select.value="fsin";
 	    			window.scrollTo(0, 0);
 					qq=this.innerHTML;
+					var backb=document.getElementById('backb')
+					if (backb!=undefined){
+					backb.remove();}
 				 	cleaner();
 					getSinger();
 				});
@@ -369,7 +372,8 @@
 	    		if (response.artists.items[0]!==undefined){
 	    		var singer_id=response.artists.items[0].id;
 	    		zname=response.artists.items[0].name;
-	    		var simg=response.artists.items[0].images[0].url;
+	    		if (response.artists.items[0].images[0]!==undefined){
+	    		var simg=response.artists.items[0].images[0].url;}
 	    		console.log(response.artists.items[0].id);
 	    		getSong(singer_id);
 	    		getrelated(singer_id);

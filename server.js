@@ -1,50 +1,24 @@
-const fs=require('fs')
-const url =require('url');
-const http=require('http');
+const path=require('path');
+const express=require('express');
+// const moment =require('moment');
 
 
-var return_Html=function(filename,response){
-	fs.readFile(filename,function(error,data){
-		if (error){
-			response.writeHead(404);
-			response.end()
-		}
-		response.writeHead(200,{
-			'Content-Type':'text/html'
-		});
-		response.end(data)	
-	})
-};
+var server=express();
 
-var return_JSON=function(data,response){
-	response.writeHead(200,{
-		'Content-Type':'application/json'
-	});
-	response.end(JSON.stringify(data));
-};
+server.use(express.static(path.join(__dirname,'static')));
 
+// server.get('/event.html',function(request,response){
+// 	var searchh=request.query.event;
+// 	if (serachh===undefined){
+// 		searchh="taylor swift"
+// 	}
+// 	return_Html("event.html",response);
+// })
 
-var server=http.createServer(function(request,response) {
-	console.log(request.url);
-	var u=url.parse(request.url);
-	if(u.pathname==='/'){
-		return_Html('index.html',response);
-	}else if (u.pathname==='/hello'){
-	return_JSON("Hello",response);
-	}else if (u.pathname==='/goodbye'){
-		return_JSON("goodybye",response);
-	}else if (u.pathname==='/main.html'){
-		return_Html("main.html",response);
-	}else if (u.pathname==='/login.html'){
-		return_Html("login.html",response);
-	}else{
-		response.end();
-	}
+server.get('hello',function(request,response){
+	response.json('hello');
 });
 
 
-
-server.listen(8000,'127.0.0.1',function(){
-	console.log('server started');
-
-});
+server.listen(8000);
+module.exports=server;
