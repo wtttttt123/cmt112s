@@ -10,7 +10,7 @@
 <body>
 	<h1 class="sub">Discover Music</h1>
 	<nav class="navcontainer">
-		<h3 class="backk"><a href=index.html>Back</a></h3>
+		<h3 class="backk"><a id="stoe" href="javascript:void(0)" onclick="stoee(); ">Find event </a><a href="index.html"> Back</a></h3>
 
 	    <form class="reeform">
 	    	<select id="sss">
@@ -40,7 +40,7 @@
 			</ul>
 	</div> 
 	<footer>
-        <h3 class="copyright">&copy;copyright </h3>
+        <h3 class="copyright">&copy; Hexarch copyright </h3>
     </footer>
 	
 	<script>
@@ -49,6 +49,15 @@
 		var listname;
 		var popid=[];
 		var qq;
+		
+
+		var stoee=function(){
+    	var sto=document.querySelector("#emname");
+    	var stotxt=sto.innerHTML
+        window.location.href = "event.html?search="+stotxt;
+    
+		};
+
 
 
 		var searchbutton=document.getElementById("singer_button")

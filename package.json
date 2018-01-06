@@ -1,8 +1,8 @@
 {
   "name": "cmt112s",
   "version": "0.0.1",
-  "description": "coursework",
-  "main": "server1.js",
+  "description": "coursework2",
+  "main": "server.js",
   "dependencies": {
     "express": "^4.16.2"
   },

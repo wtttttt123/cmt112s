@@ -11,6 +11,7 @@ footer{
     background-color: black;
     color: white;
     font-size: 20px;
+    /*margin-bottom: 0;*/
 }
 
 h3{
@@ -34,7 +35,7 @@ input[type=text]:focus {
     border-color:#333; 
 }
 
-input[type=button] {
+input[type=button], input[type=submit] {
     background-color: #eee;
     border:0 none;
     cursor:pointer;
@@ -87,7 +88,7 @@ li{
 
 
 
-
+/*index.html*/
 
 
 
@@ -184,11 +185,17 @@ h1,h2{
 
 }
 
+#stoe{
+    text-decoration: none;
+    background-color: #ff9933;
+}
+
 .backk{
     padding: 10px;
     background-color: #6666ff;
     flex-grow:1;
     text-align: end;
+
 }
 
 .reeform{
@@ -270,11 +277,14 @@ h1,h2{
 
 
 #login{
-    padding-top:30px;
+    position: fixed;
+    right:42vw;
+    top:40vh;
+    /*background-color:  #ff9933;*/
 }
 
 #loginb{
-    background-image: url("/img/111.jpg");
+    background-image: url("/img/222.jpg");
 }
 
 @media (max-width: 1140px) {

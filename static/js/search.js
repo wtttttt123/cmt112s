@@ -2,6 +2,17 @@ var markers={};
 var searchh;
 var markerArray = [];
 
+
+
+
+var etos=function(){
+        var parameters=extract();
+        var etos=parameters['search'];
+        window.location.href = "login.html?search="+etos;
+    
+};
+
+
 var parseResponse = function() {
     var response = JSON.parse(this.response);
     var items=response._embedded.events;
