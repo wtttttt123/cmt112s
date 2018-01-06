@@ -14,18 +14,17 @@
    crossorigin=""></script>
 </head>
 <body id="ebody">
-
     <header id="eventt">
         <h1 class="sub">Recent events</h1>    
     </header> 
-
     <nav class="navcontainer">
+      <!-- set the link.href different according to the singer so that it can link to correspoding song page  -->
       <h3 class="backk"><a id="stoe" href="javascript:void(0)" onclick="etos(); ">Find songs </a><a href=index.html>Back</a></h3>
       <form class="reeform" action="event.html" method="GET">
-      <label for="reevent">Event:
-          <input type="text" name="search" id="reevent">
-      </label>
-      <input type="submit" id="event_button" value="search">
+        <label for="reevent">Event:
+            <input type="text" name="search" id="reevent">
+        </label>
+        <input type="submit" id="event_button" value="search">
       </form>
     </nav>
     <p id="loc">Location</p>
@@ -37,6 +36,140 @@
     <footer>
         <h3 class="copyright">&copy; Hexarch copyright </h3>
     </footer>
-    <script src="js/search.js"></script>
+    <script>
+      //for zoom and manipulate markers
+      var markers={}; 
+      var markerArray = [];
+      // query in the search box
+      var searchh;
+
+      //the find songs button in the navigation bar can link corresponding song
+      var etos=function(){
+              var parameters=extract();
+              var etos=parameters['search'];
+              window.location.href = "login.html?search="+etos;
+          
+      };
+
+      // deal with response, creater marker according to the location and adding information in the marker 
+      var parseResponse = function() {
+          var response = JSON.parse(this.response);
+          var items=response._embedded.events;
+          // show information on the map 
+          for (var i=0;i<items.length;i++){
+              //show the list item in the event list
+              processResponse(items[i]);
+              //find loctions of the event
+              var loc=items[i]._embedded.venues[0].location
+              console.log(loc)
+              //create markers
+              markers[items[i].id]=(L.marker([loc.latitude, loc.longitude]))
+              // deal with the pricerange 
+              if (items[i].priceRanges!=undefined){
+                // add link in the marker
+                markers[items[i].id].bindPopup("<b>"+"<a href="+items[i].url+" target=_blank>"+(i+1)+"."+items[i].name+"</a>"+"</b><br>"
+                    +items[i].dates.start.localDate+"<br>"+items[i]._embedded.venues[0].country.name+"<br>"
+                    +items[i]._embedded.venues[0].city.name+"<br>"+"$"+items[i].priceRanges[0].min+"--$"+items[i].priceRanges[0].max)
+              }
+              else {
+                  markers[items[i].id].bindPopup("<b>"+"<a href="+items[i].url+" target=_blank>"+(i+1)+"."+items[i].name+"</a>"+"</b><br>"
+                  +items[i].dates.start.localDate+"<br>"+items[i]._embedded.venues[0].country.name+"<br>"
+                  +items[i]._embedded.venues[0].city.name)
+              }
+              // make  makers can be clicked to show information 
+              markerArray.push(markers[items[i].id]);
+              markers[items[i].id].on('click', function(){
+              this.openPopup();
+              })
+          };
+
+          // make the map zoom in to proper view to see all makers
+          var featureGroup = L.featureGroup(markerArray).addTo(mymap);  
+          mymap.fitBounds(featureGroup.getBounds());
+      }
+
+      // Function to ensure parameters used in request are encoded correctly
+      var encodeParameters = function(params) {
+          var strArray = [];
+          for (var key in params) {
+              if (params.hasOwnProperty(key)) {
+                  var paramString = key + "=" + params[key];
+                  strArray.push(paramString);
+              }
+          }
+          return strArray.join("&");
+      }
+
+
+      //function show the event list 
+      var processResponse=function(info){
+          var item=document.createTextNode(info.name+'('+info.dates.start.localDate+')');
+          var para=document.createElement("li");
+          var body=document.querySelector('#ppp');
+          para.appendChild(item);
+          para.id=info.id;  
+          body.appendChild(para);
+          if (info.imageLinks!=undefined){
+              var img=document.createElement("img");
+              img.src = info.imageLinks.smallThumbnail;
+              body.appendChild(img);
+          }
+          
+          // make the item in the list can be clicked to zoom the makers and information in the map
+          para.addEventListener('click', function(){
+              markers[para.id].openPopup();
+              var latLngs = [ markers[para.id].getLatLng() ];
+              var markerBounds = L.latLngBounds(latLngs);
+              mymap.fitBounds(markerBounds);        
+          })
+
+      }
+
+
+      // initiate the map
+      var mymap = L.map('mappp').setView([51.505, -0.09], 13);
+      var marker = L.marker([51.5, -0.09]).addTo(mymap);
+
+      L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+          attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+          maxZoom: 7,
+          id: 'mapbox.streets',
+          accessToken: 'pk.eyJ1Ijoid3R0dHR0dDEyMyIsImEiOiJjamE5cWYwancwbDZzMndxZWpkNzRldHNxIn0.90ZN7qBm2mgV7ciNymNJZg',
+      }).addTo(mymap);
+
+
+
+      var extract=function(){
+              var query=window.location.search.substring(1);
+              var params=query.split("&"); 
+              var return_data={};
+              for (var i=0;i<params.length;i++){
+                  var keyvalue=params[i].split('=');
+                  console.log(keyvalue);
+                  return_data[keyvalue[0]]=keyvalue[1]
+              }
+              return return_data;
+          }
+      var parameters=extract();
+      searchh=parameters['search'];
+
+      // send request to api
+      var event = function() {
+          parameters = {
+              keyword: searchh,
+              size: 10,
+              apikey:'LYlkrschyiZZg7173JDdovwvgBllKXBP'
+          };
+          var xhttp = new XMLHttpRequest();
+          xhttp.addEventListener('load', parseResponse);
+          var url = 'https://app.ticketmaster.com/discovery/v2/events.json?'+ encodeParameters(parameters);    
+          console.log(url);
+          xhttp.open('GET', url);
+          xhttp.send();
+      };
+      // page load to run event function
+      window.onload=event();
+
+    </script>
 </body>
 </html>

@@ -5,8 +5,6 @@
     <title>login</title>
     <link rel="stylesheet" href="css/style.css">
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-    
-   
 </head>
 <body id="loginb">
     <header id="loginh">
@@ -17,7 +15,7 @@
     <script>
         var mstate;
 
-
+        // extract the query in the login page
         var extract=function(){
             var query=window.location.search.substring(1);
             var params=query.split("&"); 
@@ -30,11 +28,9 @@
             return return_data;
         }
         var parameters=extract();
-
         mstate=parameters['search'];
 
-        console.log(mstate)    
-
+        //  authentication and pass query as the state 
         var base_url='https://accounts.spotify.com/authorize';
         var params1={
             client_id: '46b019fac4c44b26ac9461998998f584',
@@ -45,8 +41,8 @@
             state: mstate
         }
         
+        // join all key value pairs and store in an array
         var encodeParameters = function(params) {
-            // join all key value pairs and store in an array
             var strArray = [];
             for (var key in params) {
                 if (params.hasOwnProperty(key)) {
@@ -54,12 +50,11 @@
                     strArray.push(paramString);
                 }
             }
-            // join everything in the array together
             return strArray.join("&");
         }
 
+        // compelete query and link it with the login button
         var query_url=base_url+"?"+encodeParameters(params1);
-        console.log(query_url)
         var login_link=document.querySelector('#login');
         login.href=query_url;
 

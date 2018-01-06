@@ -9,6 +9,7 @@
 <body>
     <div id=searchpic>
       <div class="container" id="container1">
+        <!--Image https://www.flickr.com/photos/natanperes/15798180702/in/photolist-q52NHU-863dsM-9UXcZQ-7YwjXd-fswfRe-9NehaN-Xyf57R-fBPHp2-9UUc4g-cxwWC1-hKpA7m-SaxrJp-fHmmt9-6mwvi-6yqC4E-91MdCz-bm7xTT-eYLFoX-e9QLxA-aa9FLc-4C3nvw-89EcYa-ei5izh-fcDoXb-89HsjW-6wuvL4-pZW6Rr-9kjhm2-fLt1RE-CbnbpL-cnsdCo-71z7xC-9oDri9-pix5AZ-bteizr-ekX6b6-f4ACG3-9UXjQy-rbzp3U-p4nmYn-afozA2-h8ERTe-4BYB92-bF1LRf-RCNf6M-fcDoM9-oVkkyJ-5WjXsR-ekWXc6-6qJ6V5 "Fotos do I Festival da Amazônia Ocidental, realizado na Faculdade Ocidental da Amazônia, Rio Branco - Acre." by Natan Peres released under https://creativecommons.org/licenses/by-nd/2.0/ CC BY-ND 2.0-->
         <img src="img/concertbk.jpg" alt="eventpicbk" class="hoverimg" id="eventimg">
         <img src="img/concert.jpg"  alt="eventpic" class="overlay" id="convertc">
         <div id="overlayevent" class="overlay">
@@ -16,6 +17,7 @@
         </div>
       </div>
       <div class="container" id="container2">
+        <!--Image https://www.flickr.com/photos/12287146@N04/5383059648/in/photolist-9cFA6f-VBnWVA-8WHf56-prpLJQ-U5Tc18-9Ab7GY-pHPdVv-prnRHD-o8QAYw-aoARic-7WshYo-6QeDXr-9R1rei-8WLiPG-X7f9Mm-X7exp7-X7ey5A-Wz9Niq-Wz9NmS-Wz9TJW-Wz9TVC-6QeDNn-Wz9S5U-Wz9SKw-Wz9RVW-qKLQ1t-9NqMQ3-4pkivD-iVpfks-VdogVD-ZSHi9q-U3E7hj-o2ARuv-bzmwVL-bNgbe8-pRsoNR-X7eyUb-a5BDqN-VWNyvp-nzTLt3-XaW7op-X7f9Zf-TuBPEQ-c4vzGS-CJKu54-Df2USm-Wz9QnW-nWewEz-Wz9RbQ-pMG9cy "theRealJWalker studio session" by Jerald Jackson released under https://creativecommons.org/licenses/by-nd/2.0/ CC BY-ND 2.0-->
         <img src="img/studiobk.jpg" alt="songpicbk" class="hoverimg" id="songimg">
          <img src="img/studio.jpg" alt="songpic" class="overlay" id="eventc">
         <div id="overlaysong" class="overlay">
@@ -24,34 +26,34 @@
       </div>
     </div>
 
-    <header id="indexh">
-        <h1>MusiCURL</h1>
-        <h2 ><em>Find Music and Concert</em></h2>
-        <form method="GET" id="myform">
-            <input type="button" id="song_button" value="song" onclick="askForsong()"/>
-            <input type="text" name="search"  placeholder="enter favourite singer" id="serachindex">
-            <input type="button" id="event_button" value="event" onclick="askForevent()"/>
-        </form>
+  <header id="indexh">
+    <h1>MusiCURL</h1>
+    <h2 ><em>Find Music and Concert</em></h2>
+    <form method="GET" id="myform">
+        <input type="button" id="song_button" value="song" onclick="askForsong()"/>
+        <input type="text" name="search"  placeholder="enter favourite singer" id="serachindex">
+        <input type="button" id="event_button" value="event" onclick="askForevent()"/>
+    </form>
   </header> 
-    <footer>
-        <h3 class="copyright">&copy; Hexarch copyright </h3>
-    </footer>
-    <script>
-        var form=document.getElementById("myform");
-        function askForevent() {
-                form.action="event.html";
-                form.submit();
-        }
-        function askForsong() {
-                form.action="login.html";
-                form.submit();
-        }
-        var qq=document.getElementById("scontent")
-        var eventss=document.getElementById("overlayevent");
-        eventss.addEventListener('click',askForevent);
-         var eventss=document.getElementById("overlaysong");
-        eventss.addEventListener('click',askForsong);
-        
-    </script>
+  <footer>
+      <h3 class="copyright">&copy; Hexarch copyright </h3>
+  </footer>
+  <script>
+      //Two search-buttons submit different forms
+      var form=document.getElementById("myform");
+      function askForevent() {
+              form.action="event.html";
+              form.submit();
+      }
+      function askForsong() {
+              form.action="login.html";
+              form.submit();
+      }
+      //Two pictures in the index page also can be the button to search
+      var eventss=document.getElementById("overlayevent");
+      eventss.addEventListener('click',askForevent);
+      var songss=document.getElementById("overlaysong");
+      songss.addEventListener('click',askForsong);
+  </script>
 </body>
 </html>

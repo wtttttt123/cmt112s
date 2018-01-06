@@ -10,8 +10,8 @@
 <body>
 	<h1 class="sub">Discover Music</h1>
 	<nav class="navcontainer">
-		<h3 class="backk"><a id="stoe" href="javascript:void(0)" onclick="stoee(); ">Find event </a><a href="index.html"> Back</a></h3>
-
+		<!-- set the link.href different according to the singer so that it can link to correspoding event page  -->
+		<h3 class="backk"><a id="stoe" href="javascript:void(0)" onclick="stoee();">Find event </a><a href="index.html"> Back</a></h3>
 	    <form class="reeform">
 	    	<select id="sss">
               <option value="fsin">Singer</option>
@@ -24,11 +24,10 @@
 	<p id="sname"><p>
 	<div id="scontainer">
 		<div id="simg">
-			<img src='placeholder.jpg' alt="songer" id="artistimg">
+			<img src='placeholder.jpg' alt="singerphoto" id="artistimg">
 		</div>
 		<div id="output">
 			<ol>
-			
 			</ol>
 			<button type="button" id='addlist'>Add Playlist!</button>
 		</div>
@@ -36,7 +35,6 @@
 	<div id="relart">
 			<p id=rep>Related Artists</p>
 			<ul>
-			
 			</ul>
 	</div> 
 	<footer>
@@ -44,38 +42,47 @@
     </footer>
 	
 	<script>
+		//name of sub-title like singer's name or album's name
 		var zname;
+		//user spotify id 
 		var user_id;
+		// the name of adding list in spotify 
 		var listname;
+		// popid is the id of songs for adding list in spotify.
 		var popid=[];
+		//query in the serach box
 		var qq;
 		
-
+		//the find event button in the navigation bar can link corresponding event
 		var stoee=function(){
     	var sto=document.querySelector("#emname");
     	var stotxt=sto.innerHTML
         window.location.href = "event.html?search="+stotxt;
-    
 		};
 
 
-
+		// user re-search other singers or albums
 		var searchbutton=document.getElementById("singer_button")
 		searchbutton.addEventListener("click",function(){
+			//remove the imformation in the page
 			cleaner();
+			// determining the query in the search box
 			qq=document.getElementById("ree").value;
+			// decide searching singer or album
 			var select=document.getElementById('sss').value;
 			if(select=="fsin"){
 				getSinger();
 			}
 			else if (select=="falb"){
-				getaa();
+				getAlbum();
 			}
 		});
 
-
+		// function to remove the previous singer or album
 		var cleaner=function(){
+			//remove the song list
 			var cc=document.getElementsByTagName("li");
+			//remove the name of singer or the album
 			var dd=document.getElementsByTagName("em");
     		Element.prototype.remove = function() {
     		this.parentElement.removeChild(this);
@@ -89,16 +96,20 @@
 		    }
 		    dd.remove();
 		    cc.remove();
+		    // empty the song in the popid 
 		   	popid.length=0;
 
 		};
 
+
+		// function changing the image of singer or album
 		var setimg=function(imgurl){
 			var imgg=document.querySelector("#artistimg");
 			imgg.src=imgurl;
 		};
 
-
+		//function add songs in the popid to the list created in the spotify
+		// the attempt of POST
 		var addTracks=function(user_id,playlist_id){
 			var add_tracks_url='https://api.spotify.com/v1/users/'+user_id+'/playlists/'+playlist_id+'/tracks';
 			var xhttp=new XMLHttpRequest();
@@ -113,6 +124,7 @@
 			};
 			xhttp.send(JSON.stringify(params));
 		}
+		
 		var createPlayList=function(user_id){
 			var create_player_url='https://api.spotify.com/v1/users/'+user_id+'/playlists';
 			var xhttp=new XMLHttpRequest();
@@ -125,6 +137,7 @@
 				var playlist_id=response.id;
 				addTracks(user_id,playlist_id);
 			});
+			//make the list name changing according to the singer
 			listname="New "+qq+" List";
 			var params={
 				name:listname,
@@ -132,11 +145,9 @@
 				description:"Fabulous!"
 			};	
     		xhttp.send(JSON.stringify(params));
-    		
 		};
 
 		var encodeParameters = function(params) {
-		    // join all key value pairs and store in an array
 		    var strArray = [];
 		    for (var key in params) {
 		        if (params.hasOwnProperty(key)) {
@@ -144,12 +155,10 @@
 		            strArray.push(paramString);
 		        }
 		    }
-		    // join everything in the array together
 		    return strArray.join("&");
 		}
 
-		console.log(window.location.hash);
-
+		//extract the query passed from login page
 		var extract=function(){
 			var query=window.location.hash.substring(1);
 			var params=query.split("&");
@@ -161,7 +170,10 @@
 			}
 			return return_data;
 		}
+		
 		var parameters=extract();
+		
+		// if user did not put anything in the searchbox the page will randomly return singer
 		if (parameters['state']==""){
 			var textArray = [
     		'Beatles',
@@ -171,16 +183,11 @@
     		'Doors',
     		'Bruno Mars'];
 			var randomNumber = Math.floor(Math.random()*textArray.length);
-
 			qq=textArray[randomNumber]
 		}
 		else{qq=parameters['state'];}
-		
-		console.log(qq);  
 
-
-
-
+		//deal with the songlist in the song page
 		var processResponce=function(items){
     		var list=document.querySelector("#output ol");
     		sname=document.querySelector("#sname");
@@ -193,30 +200,41 @@
         		var list_item=document.createElement('li');
         		var link=document.createElement('a');
         		var text_item=document.createTextNode(items[i].name+"   ");
+        		//add button behind the name of the song to link its album
         		var abutton = document.createElement('button');
     			abutton.innerHTML="-"+items[i].album.name;
+    			//abutton link to the album
     			abutton.addEventListener ("click", function() {
 				 	cleaner();
+	    			// make selection to the album to hint user it is a album rather than a singer
 	    			var select=document.getElementById('sss');
 	    			select.value="falb";
+	    			// go to top 
 	    			window.scrollTo(0, 0);
+	    			//change sub-title 
 	 				var a_id=items[i].album.id;
 	 				zname=items[i].album.name;
+	 				//change image
 		    		var simg=items[i].album.images[0].url;
 		    		setimg(simg);
-	    			getSong1(a_id);
+		    		// get the all songs in the certain album
+	    			getSongInAlbum(a_id);
 	    			var ren=items[i].album.artists;
-	    			getrelated(ren[0].id);
+	    			//get related artist
+	    			getRelated(ren[0].id);
+	    			//add button to the artist
 	    			backToaArtist(ren);
 	    			});
+    			//change the popid for adding tracks in spotify 
         		popid.push('spotify:track:'+items[i].id);
         		list_item.appendChild(text_item);
         		list_item.appendChild(abutton);
         		list.appendChild(list_item);
-	        	
 		    }
 		};
 
+
+		// function adding a button to back to the artist when user are guided into a certain album
 		var backToaArtist=function(ren){
 			var abutton = document.createElement('button');
     			abutton.innerHTML="Go to the Artist";
@@ -231,13 +249,12 @@
     				var select=document.getElementById('sss');
 	    			select.value="fsin";
     			});
-    			
 		}
 
 
 
-		
-		var aprocessResponce=function(items){
+		// function to show album when user search a certain album		
+		var processAlbum=function(items){
     		var list=document.querySelector("#output ol");
     		var sname=document.querySelector("#sname");
         	var namenode=document.createTextNode(zname);
@@ -251,10 +268,10 @@
         		popid.push('spotify:track:'+items[i].id)
         		list_item.appendChild(text_item);
         		list.appendChild(list_item);
-        	
 		    }
 		};
 
+		// function show the related artist 
 		var precessunder=function(items){
     		var list=document.querySelector("#relart ul");
     		var jj=5;
@@ -264,9 +281,7 @@
     		for (let i=0;i<jj;i++){
         		var list_item=document.createElement('li');
         		var text_item=document.createTextNode(items[i].name);
-
         		var br=document.createElement('p');
-        		// list.appendChild(list_item);
         		if (items[i].images!=undefined){
         		var img=document.createElement("img");
         		img.src = items[i].images[0].url;
@@ -274,7 +289,7 @@
         		img.height=150;
         		list_item.appendChild(img)
     			};
-    			
+    			// add button to make related artists can be click.
     			var abutton = document.createElement('button');
     			abutton.innerHTML=items[i].name;
     			abutton.addEventListener ("click", function() {
@@ -282,6 +297,7 @@
 	    			select.value="fsin";
 	    			window.scrollTo(0, 0);
 					qq=this.innerHTML;
+					//remove the back to artist button if is not a certain album page
 					var backb=document.getElementById('backb')
 					if (backb!=undefined){
 					backb.remove();}
@@ -291,16 +307,14 @@
 				br.appendChild(abutton);
     			list_item.appendChild(br);
     			list.appendChild(list_item);
-    			
 		    }
 		};
 
 
 		var parameters=extract();
-
 		var access_token=parameters['access_token'];		
-		console.log(access_token)
 
+		// get song according to the singer's id 
     	var getSong=function(id){
     		var song_url="https://api.spotify.com/v1/artists/"+id+"/top-tracks?country=GB"
     		var xhttp = new XMLHttpRequest();
@@ -311,11 +325,11 @@
 	    		var response=JSON.parse(this.response);
 	    		console.log(response);
 	    		processResponce(response.tracks);
-
 	    	});
     	};
 
-    	var getSong1=function(id){
+    	// get song according to the album's id 
+    	var getSongInAlbum=function(id){
     		var song_url="https://api.spotify.com/v1/albums/"+id+"/tracks"
     		var xhttp = new XMLHttpRequest();
 	    	xhttp.open('GET', song_url);
@@ -323,12 +337,14 @@
 	    	xhttp.send();
 	    	xhttp.addEventListener('load', function(){
 	    		var response=JSON.parse(this.response);
-	    		aprocessResponce(response.items);
+	    		processAlbum(response.items);
 
 	    	});
     	};
 
-    	var getrelated=function(id){
+
+    	// get realted artist according to singer's id
+    	var getRelated=function(id){
     		var re_url="https://api.spotify.com/v1/artists/"+id+"/related-artists"
     		var xhttp = new XMLHttpRequest();
 	    	xhttp.open('GET', re_url);
@@ -336,16 +352,14 @@
 	    	xhttp.send();
 	    	xhttp.addEventListener('load', function(){
 	    		var response=JSON.parse(this.response);
-	    		console.log(response);
 	    		precessunder(response.artists);
-
 	    	});
     	};
 
 
 
 
-
+    	// button to add list into spotify
     	var add_list=document.querySelector("#addlist");
 	    add_list.addEventListener('click', function(){
 	    	var me_url="https://api.spotify.com/v1/me";
@@ -362,6 +376,7 @@
 		});
 
 
+	    // function get singer's id and it's popular songs according to the query'qq'
     	var getSinger=function() {
 			console.log(qq)  
     		var artp={
@@ -385,7 +400,7 @@
 	    		var simg=response.artists.items[0].images[0].url;}
 	    		console.log(response.artists.items[0].id);
 	    		getSong(singer_id);
-	    		getrelated(singer_id);
+	    		getRelated(singer_id);
 	    		setimg(simg);}
 	    		else{
 	    			setimg("img/111.jpg");
@@ -397,7 +412,9 @@
 	    		}
 	    	});
 	    }
-  		var getaa=function() {
+  		
+	    // function get album's id, songs and its singer's related artists according to the query'qq'
+  		var getAlbum=function() {
 			console.log(qq)  
     		var artp={
 			q: qq,
@@ -419,8 +436,8 @@
 		    		var singer_id=response.albums.items[0].artists[0].id;
 		    		var simg=response.albums.items[0].images[0].url;
 		    		console.log(response.albums.items[0].id);
-		    		getSong1(al_id);
-		    		getrelated(singer_id);
+		    		getSongInAlbum(al_id);
+		    		getRelated(singer_id);
 		    		setimg(simg);
 		    		backToaArtist(response.albums.items[0].artists);
 	    		}
@@ -434,10 +451,8 @@
 	    		}
 	    	});
 	    }
-
-   		getSinger();
-
+	    // when page load, searching the singer since it was redirect from the index page or event page, the album searching can be ignored in this step. 
+   		window.onload=getSinger();
 	</script>
-
 </body>
 </html>
