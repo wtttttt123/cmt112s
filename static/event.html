@@ -154,17 +154,22 @@
       searchh=parameters['search'];
 
       // send request to api
-      var event = function() {
-          parameters = {
-              keyword: searchh,
-              size: 10,
-              apikey:'LYlkrschyiZZg7173JDdovwvgBllKXBP'
+       parameters = {
+              term: searchh,
+              //size: 10,
+              //apikey:'LYlkrschyiZZg7173JDdovwvgBllKXBP'
+              latitude:37.786882,
+              longitude:-122.399972,
           };
           var xhttp = new XMLHttpRequest();
+          
           xhttp.addEventListener('load', parseResponse);
-          var url = 'https://app.ticketmaster.com/discovery/v2/events.json?'+ encodeParameters(parameters);    
+          var url = 'https://api.yelp.com/v3/businesses/search?'+ encodeParameters(parameters);    
           console.log(url);
           xhttp.open('GET', url);
+          xhttp.setRequestHeader('Authorization', 'Bearer '+ 
+'oFHsJ268xS68YA8NxV4l6fQpb8xwO0xelTzGfKE1gQZUuHE-NmQEf_flSPB18kyZ_IvZjUXOKSL3_3EYb_0lMUfZdsbGwODk1qyTXO2W59tPFp8SNK-65hy5iab-WnYx');
+          //xhttp.setRequestHeader('Content-Type','application/json');
           xhttp.send();
       };
       // page load to run event function
